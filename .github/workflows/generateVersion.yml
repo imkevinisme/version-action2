@@ -20,9 +20,7 @@ jobs:
         uses: damienaicheh/extract-version-from-tag-action@v1.1.0
 
       - name: Set Version
-        run: |
-
-          echo "::set name=env.VERSION::$MAJOR.$MINOR.$PATCH"
+        run: echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
 
       - name: Echo Version
         run: echo "Version = $VERSION"

@@ -1,16 +1,11 @@
 name: Get Version
 
 on:
+  push:
   release:
-    types: [published]
 
 jobs:
   checks:
-    runs-on: ubuntu-latest
-
-  build:
-    # runs-on: ubuntu-latest
-    # runs-on: self-hosted
     runs-on: ubuntu-latest
 
     env:
@@ -18,13 +13,6 @@ jobs:
       APP_VERSION: ${{ github.event.release.tag_name }}
 
     steps:
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/checkout@v2
-
-      - name: Print commit ID and message
-        run: |
-          git show -s --format='%h %s'
-
       - name: "Create env file"
         run: |
           touch .env

@@ -20,6 +20,5 @@ jobs:
         uses: damienaicheh/extract-version-from-tag-action@v1.1.0
         env.VERSION: "$MAJOR.$MINOR.$PATCH"
 
-
       - name: Echo Version
-        run: echo "::version:: ${{env.VERSION}}"
+        run: echo "::version::$env.VERSION"

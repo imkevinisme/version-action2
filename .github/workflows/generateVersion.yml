@@ -3,6 +3,9 @@ name: Get Version
 on:
   push:
 
+env:
+  VERSION: Version-Not-Available
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,6 +18,8 @@ jobs:
 
       - name: Extract version from tag
         uses: damienaicheh/extract-version-from-tag-action@v1.1.0
+        env.VERSION: "$MAJOR.$MINOR.$PATCH"
+
 
       - name: Echo Version
-        run: echo "::version::$MAJOR $MINOR $PATCH"
+        run: echo "::version:: ${{env.VERSION}}"

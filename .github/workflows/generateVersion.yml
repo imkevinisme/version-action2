@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
   env:
-  VERSION: ${{ github.event.release.tagName }}
-  DATE: ${{ github.event.release.createdAt }}
+    VERSION: ${{ github.event.release.tagName }}
+    DATE: ${{ github.event.release.createdAt }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
+        with:
+          fetch-depth: 0
 
       - name: Echo information
         run: echo "Tag Name: ${{env.VERSION}}"

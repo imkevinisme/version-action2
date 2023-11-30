@@ -13,20 +13,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Extract version from tag
-      #   uses: damienaicheh/extract-version-from-tag-action@v1.1.0
+      - name: Extract version from tag
+        uses: damienaicheh/extract-version-from-tag-action@v1.1.0
 
-       - name: Get version
-        # id must be specified to retrieve the output of the step
-        id: version-step
-        uses: michmich112/extract-version@main
-        with:
-          # specify here the path to your version file (e.g. package.json, pom.xml...)
-          version-file: VERSION
-          schema: major.minor.build
-
-      - name: test
-        run: |
-          echo "version -> $VERSION"
-        env:
-          VERSION: ${{ steps.version-step.outputs.version }}
+      - name: Echo Version
+        run: echo ${{tag}}

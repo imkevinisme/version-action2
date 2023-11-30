@@ -17,4 +17,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Echo information
-        run: echo "Tag Name = ${{ github.event.release.tag_name}}"
+        run: echo "Tag Name = ${{ github.event.release.tag}}"

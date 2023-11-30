@@ -17,6 +17,8 @@ jobs:
       - name: Gets latest creaetd release info
         id: latest_release_info
         uses: jossef/action-latest-release-info@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Echo Release Version
         run: echo ${{steps.latest_release_info.outputs.tag_name}}

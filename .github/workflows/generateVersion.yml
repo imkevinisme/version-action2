@@ -20,7 +20,9 @@ jobs:
         uses: damienaicheh/extract-version-from-tag-action@v1.1.0
 
       - name: Set Version
-        run: echo "::set-env name=VERSION::&MAJOR.$MINOR.$PATCH"
+        run: |
+
+          echo "::set name=VERSION::$MAJOR.$MINOR.$PATCH"
 
       - name: Echo Version
         run: echo "Version = $VERSION"

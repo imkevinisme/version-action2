@@ -5,16 +5,18 @@ on:
   release:
 
 jobs:
-  checks:
+  test:
     runs-on: ubuntu-latest
 
-    env:
-      # database ENV CAN BE ONLY  PROD,DEV,UAT,STAGING
-      APP_VERSION: ${{ github.event.release.tag_name }}
+  env:
+  VERSION: ${{ github.event.release.tagName }}
+  DATE: ${{ github.event.release.createdAt }}
 
     steps:
-      - name: "Create env file"
-        run: |
-          touch .env
-          echo "NEXT_PUBLIC_APP_VERSION=${{ env.APP_VERSION }}" >> .env
-          cat .env
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Echo information
+        run: echo "Tag Name: ${{env.VERSION}}"

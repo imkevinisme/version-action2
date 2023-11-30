@@ -18,13 +18,12 @@ jobs:
         with:
           fetch-depth: 0
 
-
-    - name: Print Release Information
-      run: |
-        echo "Action: ${{ github.event_name }}"
-        echo "Release ID: ${{ github.event.release.id }}"
-        echo "Tag Name: ${{ github.event.release.tag_name }}"
-        echo "Target Commitish: ${{ github.event.release.target_commitish }}"
-        echo "Repository: ${{ github.repository }}"
-        echo "Sender: ${{ github.event.sender.login }}"
-      shell: bash
+      - name: Print Release Information
+        run: |
+          echo "Action: ${{ github.event_name }}"
+          echo "Release ID: ${{ github.event.release.id }}"
+          echo "Tag Name: ${{ github.event.release.tag_name }}"
+          echo "Target Commitish: ${{ github.event.release.target_commitish }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Sender: ${{ github.event.sender.login }}"
+        shell: bash

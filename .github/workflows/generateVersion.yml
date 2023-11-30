@@ -34,4 +34,4 @@ jobs:
           latest: true
 
       - name: Echo Release Tag
-        run: echo "Version: = $tag_name"
+        run: echo "Version: = tag_name"

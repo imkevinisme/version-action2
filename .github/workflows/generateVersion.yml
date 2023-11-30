@@ -5,7 +5,7 @@ on:
   release:
 
 env:
-  VERSION: ${{ github.event.release.tag }}
+  VERSION: ${{ github.event.release.tag_name }}
   DATE: ${{ github.event.release.createdAt }}
 
 jobs:
@@ -20,10 +20,6 @@ jobs:
 
       - name: Print Release Information
         run: |
-          echo "Action: ${{ github.run_number}}"
-          echo "Release ID: ${{ github.release.id }}"
-          echo "Tag Name: ${{ github.release.tag_name }}"
-          echo "Target Commitish: ${{ github.event.release.target_commitish }}"
-          echo "Repository: ${{ github.repository }}"
-          echo "Sender: ${{ github.event.sender.login }}"
-        shell: bash
+          touch.env
+          echo "Version: ${{ env.VERSION }}" >> .env
+          cat .env

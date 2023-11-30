@@ -4,9 +4,9 @@ on:
   push:
   release:
 
-env:
-  VERSION: ${{ github.event.release.tagName }}
-  DATE: ${{ github.event.release.createdAt }}
+# env:
+#   VERSION: ${{ github.event.release.tagName }}
+#   DATE: ${{ github.event.release.createdAt }}
 
 jobs:
   test:
@@ -17,4 +17,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Echo information
-        run: echo "Tag Name = ${{env.VERSION}}"
+        run: echo "Tag Name = ${{ github.event.release.tag_name}}"

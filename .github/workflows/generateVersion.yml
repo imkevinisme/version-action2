@@ -19,4 +19,4 @@ jobs:
           fetch-depth: 0
 
       - name: Echo information
-        run: echo "Version =  $VERSION \n Date = $DATE"
+        run: echo "Version = VERSION Date = DATE"

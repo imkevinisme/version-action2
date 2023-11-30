@@ -5,7 +5,7 @@ on:
   release:
 
 env:
-  VERSION: ${{ github.event.release.tagName }}
+  VERSION: ${{ github.event.release.tag_name }}
   DATE: ${{ github.event.release.createdAt }}
 
 jobs:

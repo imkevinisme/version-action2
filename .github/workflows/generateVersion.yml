@@ -4,14 +4,15 @@ on:
   push:
   release:
 
-env:
-  VERSION: "1.2"
-  DATE: ${{ github.event.release.createdAt }}
+# env:
+#   VERSION: ${{ github.event.release.tag_name }}
+#   DATE: ${{ github.event.release.createdAt }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    env:
+      ARCHIVE_NAME: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -20,3 +21,6 @@ jobs:
         run: |
           echo "Tag Name = ${{ env.VERSION }}" >> $GITHUB_ENV
           echo "Tag Name = ${{ env.DATE }}" >> $GITHUB_ENV
+
+      - name: check-version
+        run: '[[ $("$ARCHIVE_NAME"/k1s -v) = "${{ github.event.release.tag_name }}" ]]'

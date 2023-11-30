@@ -1,25 +1,42 @@
 name: Get Version
 
 on:
-  push:
   release:
-
-env:
-  VERSION: ${{ github.event.release.tag_name }}
-  DATE: ${{ github.event.release.createdAt }}
+    types: [published]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  checks:
+    runs-on: [self-hosted, api-marc-prod]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - name: List PM2
+        run: pm2 list
+        env:
+          CI: true
 
-      - name: Print Release Information
+  build:
+    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    runs-on: [self-hosted, api-marc-prod]
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    env:
+      # database ENV CAN BE ONLY  PROD,DEV,UAT,STAGING
+      APP_VERSION: ${{ github.event.release.tag_name }}
+
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/checkout@v2
+
+      - name: Print commit ID and message
+        run: |
+          git show -s --format='%h %s'
+
+      - name: "Create env file"
         run: |
           touch .env
-          echo "Version=${{ env.VERSION }}" >> .env
+          echo "NEXT_PUBLIC_APP_VERSION=${{ env.APP_VERSION }}" >> .env
           cat .env

@@ -17,4 +17,4 @@ jobs:
         uses: damienaicheh/extract-version-from-tag-action@v1.1.0
 
       - name: Echo Version
-        run: echo "::version::$MAJOR"
+        run: echo "::version::$MAJOR $MINOR $PATCH"

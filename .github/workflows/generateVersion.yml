@@ -4,9 +4,9 @@ on:
   push:
   release:
 
-  env:
-    VERSION: ${{ github.event.release.tagName }}
-    DATE: ${{ github.event.release.createdAt }}
+env:
+  VERSION: ${{ github.event.release.tagName }}
+  DATE: ${{ github.event.release.createdAt }}
 
 jobs:
   test:

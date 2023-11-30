@@ -22,7 +22,7 @@ jobs:
       - name: Set Version
         run: |
 
-          echo "::set name=VERSION::$MAJOR.$MINOR.$PATCH"
+          echo "::set name=env.VERSION::$MAJOR.$MINOR.$PATCH"
 
       - name: Echo Version
         run: echo "Version = $VERSION"

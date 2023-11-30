@@ -4,13 +4,13 @@ on:
   push:
   release:
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
   env:
     VERSION: ${{ github.event.release.tagName }}
     DATE: ${{ github.event.release.createdAt }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout

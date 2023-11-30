@@ -5,7 +5,6 @@ on:
 
 env:
   VERSION: "Version-Not-Available"
-  GITHUB_TOKEN: ${{ github.token }}
 
 jobs:
   test:
@@ -14,8 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        # with:
-        #   fetch-depth: 0
+        with:
+          fetch-depth: 0
 
       # - name: Extract version from tag
       #   uses: damienaicheh/extract-version-from-tag-action@v1.1.0

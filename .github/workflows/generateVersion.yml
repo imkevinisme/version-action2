@@ -6,22 +6,12 @@ on:
 
 jobs:
   checks:
-    runs-on: [self-hosted, api-marc-prod]
-
-    steps:
-      - name: List PM2
-        run: pm2 list
-        env:
-          CI: true
+    runs-on: ubuntu-latest
 
   build:
     # runs-on: ubuntu-latest
     # runs-on: self-hosted
-    runs-on: [self-hosted, api-marc-prod]
-
-    strategy:
-      matrix:
-        node-version: [16.x]
+    runs-on: ubuntu-latest
 
     env:
       # database ENV CAN BE ONLY  PROD,DEV,UAT,STAGING

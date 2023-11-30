@@ -13,14 +13,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Extract version from tag
-        uses: damienaicheh/extract-version-from-tag-action@v1.1.0
+      - name: Gets latest creaetd release info
+        id: latest_release_info
+        uses: jossef/action-latest-release-info@v1.2.2
 
-      - name: Set Version
-        run: echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
+      - name: Echo Release Version
+        run: echo ${{steps.latest_release_info.outputs.tag_name}}
 
-      - name: Echo Version
-        run: echo "Version = $VERSION"
+      - name: Echo Release Date
+        run: echo ${{steps.latest_release_info.outputs.created_at}}

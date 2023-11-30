@@ -20,6 +20,6 @@ jobs:
 
       - name: Print Release Information
         run: |
-          touch.env
+          touch .env
           echo "Version: ${{ env.VERSION }}" >> .env
           cat .env

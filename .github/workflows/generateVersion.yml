@@ -25,7 +25,6 @@ jobs:
       # - name: Echo Version
       #   run: echo "Version = $VERSION"
 
-      steps:
       - uses: actions/checkout@v1
       - name: "call action"
         id: last_release

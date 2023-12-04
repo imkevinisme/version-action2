@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Echo Tag Name
         run: echo "Tag Name = ${{ env.VERSION }}"
@@ -32,7 +32,8 @@ jobs:
           name: "version.json"
           json: '{"Version":${{env.VERSION}}, "Date":${{env.DATE}}}'
 
-      - name:
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Store file
+        uses: actions/upload-artifact@v3
         with:
-          commit_message: Changed files
+          name: version
+          path: version.json

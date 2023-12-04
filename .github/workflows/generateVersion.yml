@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      Name: ${{github.ref_name}}
+      Name: ${{github.event.repository.name}}
       VERSION: ${{github.event.release.tag_name}}
       DATE: ${{github.event.release.created_at}}
 

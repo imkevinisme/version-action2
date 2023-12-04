@@ -40,5 +40,5 @@ jobs:
       - name: Store file
         uses: actions/upload-artifact@v3
         with:
-          name: version
+          name: ${{ env.Name }}-version
           path: version.json

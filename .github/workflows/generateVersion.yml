@@ -1,26 +1,44 @@
 name: Get Version
 
 on:
-  push:
   release:
-
-# env:
-#   VERSION: ${{ github.event.release.tag_name }}
-#   DATE: ${{ github.event.release.createdAt }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     env:
-      ARCHIVE_NAME: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}
+      VERSION: ${{github.event.release.tag_name}}
+      DATE: ${{github.event.release.created_at}}
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Echo information
+      - name: Echo Tag Name
+        run: echo "Tag Name = ${{ env.VERSION }}"
+
+      - name: Echo Release Date
+        run: echo "Release Date = ${{ env.DATE }}"
+
+      - name: If file Exist
+        if: ${{ hashFiles('version.json') != '' }}
+        run: echo "`jq '.Version=${{env.VERSION}} .Date=${{env.DATE}}' version.json`" > version.json ; echo 'File Exist'
+
+      - name: If file Not Exist
+        if: ${{ hashFiles('version.json') == '' }}
+        uses: jsdaniell/create-json@v1.2.2
+        with:
+          name: "version.json"
+          json: '{"Version":${{env.VERSION}}, "Date":${{env.DATE}}}'
+
+      - name: Commit changes
         run: |
-          echo "Tag Name = ${{ env.VERSION }}" >> $GITHUB_ENV
-          echo "Tag Name = ${{ env.DATE }}" >> $GITHUB_ENV
-
-      - name: check-version
-        run: '[[ $("$ARCHIVE_NAME"/k1s -v) = "${{ github.event.release.tag_name }}" ]]'
+          git config --global user.email "imkevinisme@gmail.com"
+          git config --global user.name "GitHub Actions"
+          git add version.json
+          git commit -m "Update version.json"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

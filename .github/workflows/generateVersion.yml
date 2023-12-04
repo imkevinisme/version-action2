@@ -34,7 +34,7 @@ jobs:
           json: '{"Version":${{env.VERSION}}, "Date":${{env.DATE}}}'
 
       - name: Store file
-        uses: actions/upload-artifact@v3
+        uses: actions/download-artifact@v3
         with:
           name: version
           path: version.json

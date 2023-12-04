@@ -28,7 +28,7 @@ jobs:
 
       - name: If file Exist
         if: ${{ hashFiles('version.json') != '' }}
-        run: echo "`jq '.Version=${{env.VERSION}} .Date=${{env.DATE}}' version.json`" > version.json ; echo 'File Exist'
+        run: echo "`jq '.Name=${{env.Name}} .Version=${{env.VERSION}} .Date=${{env.DATE}}' version.json`" > version.json ; echo 'File Exist'
 
       - name: If file Not Exist
         if: ${{ hashFiles('version.json') == '' }}
